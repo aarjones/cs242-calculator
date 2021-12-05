@@ -1,7 +1,8 @@
 package main;
 
 import javafx.application.Application;
-import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -16,8 +17,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 import javafx.stage.Screen;
-
-import javax.swing.event.ChangeListener;
 
 public class CalculatorGUI extends Application {
     private final Rectangle2D screenBounds = Screen.getPrimary().getBounds();
@@ -62,90 +61,222 @@ public class CalculatorGUI extends Application {
         Button zero = new Button("0");
         zero.setPrefWidth(2 * MAX_WIDTH / (double) colCount);
         zero.setPrefHeight(MAX_HEIGHT / (double) rowCount);
+        zero.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                numericButtonPressed("0");
+            }
+        });
 
         Button one = new Button("1");
         one.setPrefWidth(MAX_WIDTH / (double) colCount);
         one.setPrefHeight(MAX_HEIGHT / (double) rowCount);
+        one.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                numericButtonPressed("1");
+            }
+        });
 
         Button two = new Button("2");
         two.setPrefWidth(MAX_WIDTH / (double) colCount);
         two.setPrefHeight(MAX_HEIGHT / (double) rowCount);
+        two.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                numericButtonPressed("2");
+            }
+        });
 
         Button three = new Button("3");
         three.setPrefWidth(MAX_WIDTH / (double) colCount);
         three.setPrefHeight(MAX_HEIGHT / (double) rowCount);
+        three.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                numericButtonPressed("3");
+            }
+        });
 
         Button four = new Button("4");
         four.setPrefWidth(MAX_WIDTH / (double) colCount);
         four.setPrefHeight(MAX_HEIGHT / (double) rowCount);
+        four.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                numericButtonPressed("4");
+            }
+        });
 
         Button five = new Button("5");
         five.setPrefWidth(MAX_WIDTH / (double) colCount);
         five.setPrefHeight(MAX_HEIGHT / (double) rowCount);
+        five.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                numericButtonPressed("5");
+            }
+        });
 
         Button six = new Button("6");
         six.setPrefWidth(MAX_WIDTH / (double) colCount);
         six.setPrefHeight(MAX_HEIGHT / (double) rowCount);
+        six.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                numericButtonPressed("6");
+            }
+        });
 
         Button seven = new Button("7");
         seven.setPrefWidth(MAX_WIDTH / (double) colCount);
         seven.setPrefHeight(MAX_HEIGHT / (double) rowCount);
+        seven.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                numericButtonPressed("7");
+            }
+        });
 
         Button eight = new Button("8");
         eight.setPrefWidth(MAX_WIDTH / (double) colCount);
         eight.setPrefHeight(MAX_HEIGHT / (double) rowCount);
+        eight.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                numericButtonPressed("8");
+            }
+        });
 
         Button nine = new Button("9");
         nine.setPrefWidth(MAX_WIDTH / (double) colCount);
         nine.setPrefHeight(MAX_HEIGHT / (double) rowCount);
+        nine.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                numericButtonPressed("9");
+            }
+        });
 
         Button dot = new Button(".");
         dot.setPrefWidth(MAX_WIDTH / (double) colCount);
         dot.setPrefHeight(MAX_HEIGHT / (double) rowCount);
+        dot.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                numericButtonPressed(".");
+            }
+        });
 
         Button multiply = new Button("*");
         multiply.setPrefWidth(MAX_WIDTH / (double) colCount);
         multiply.setPrefHeight(MAX_HEIGHT / (double) rowCount);
+        multiply.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                operationButtonPressed("*", Calculator.MULT_OP);
+            }
+        });
 
         Button divide = new Button("/");
         divide.setPrefWidth(MAX_WIDTH / (double) colCount);
         divide.setPrefHeight(MAX_HEIGHT / (double) rowCount);
+        divide.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                operationButtonPressed("/", Calculator.DIV_OP);
+            }
+        });
 
         Button add = new Button("+");
         add.setPrefWidth(MAX_WIDTH / (double) colCount);
         add.setPrefHeight(MAX_HEIGHT / (double) rowCount);
+        add.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                operationButtonPressed("+", Calculator.ADD_OP);
+            }
+        });
 
         Button minus = new Button("-");
         minus.setPrefWidth(MAX_WIDTH / (double) colCount);
         minus.setPrefHeight(MAX_HEIGHT / (double) rowCount);
+        multiply.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                operationButtonPressed("-", Calculator.SUB_OP);
+            }
+        });
 
         Button equals = new Button("=");
         equals.setPrefWidth(MAX_WIDTH / (double) colCount);
         equals.setPrefHeight(MAX_HEIGHT / (double) rowCount);
+        equals.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                compute();
+            }
+        });
 
         Button negate = new Button("+/-");
         negate.setPrefWidth(MAX_WIDTH / (double) colCount);
         negate.setPrefHeight(MAX_HEIGHT / (double) rowCount);
+        negate.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                negateButtonPressed();
+            }
+        });
 
         Button clear = new Button("C");
         clear.setPrefWidth(MAX_WIDTH / (double) colCount);
         clear.setPrefHeight(MAX_HEIGHT / (double) rowCount);
+        clear.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                clear();
+            }
+        });
 
         Button clearEntry = new Button("CE");
         clearEntry.setPrefWidth(MAX_WIDTH / (double) colCount);
         clearEntry.setPrefHeight(MAX_HEIGHT / (double) rowCount);
+        clearEntry.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                clearEntry();
+            }
+        });
 
         Button sqrt = new Button("√");
         sqrt.setPrefWidth(MAX_WIDTH / (double) colCount);
         sqrt.setPrefHeight(MAX_HEIGHT / (double) rowCount);
+        sqrt.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                sqrtButtonPressed();
+            }
+        });
 
         Button square = new Button("x²");
         square.setPrefWidth(MAX_WIDTH / (double) colCount);
         square.setPrefHeight(MAX_HEIGHT / (double) rowCount);
+        square.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                squareButtonPressed();
+            }
+        });
 
         Button pow = new Button("x\u02b8");
         pow.setPrefWidth(MAX_WIDTH / (double) colCount);
         pow.setPrefHeight(MAX_HEIGHT / (double) rowCount);
+        pow.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                operationButtonPressed("^", Calculator.POW_OP);
+            }
+        });
 
         Slider slider = new Slider();
         slider.setPrefWidth(MAX_WIDTH / (double) colCount);
@@ -179,28 +310,70 @@ public class CalculatorGUI extends Application {
 
         primaryStage.setScene(scene);
         primaryStage.setTitle("Calculator");
-        primaryStage.getIcons().add(new Image("file:./resources/icon.png"));
+        System.out.println(System.getProperty("user.dir"));
+        primaryStage.getIcons().add(new Image("file:./src/resources/icon.png"));
         primaryStage.show();
     }
 
     private void updateDisplayedValue() {
-        String toDisplay = Float.toString(calculator.getCurrentValue());
-        if((calculator.getCurrentValue() % 1) != 0)
+        String toDisplay = Float.toString(this.calculator.getCurrentValue());
+        if((toDisplay.endsWith(".0")))
             toDisplay = toDisplay.substring(0, toDisplay.length() - 2);
 
-        displayField.setText(toDisplay);
+        this.displayField.setText(toDisplay);
 
+    }
+
+    private void numericButtonPressed(String value) {
+        if(toClear) {
+            this.toClear = false;
+            this.displayField.clear();
+        }
+        this.displayField.appendText(value);
+    }
+
+    private void operationButtonPressed(String operationDisplayed, String operationKey) {
+        this.calculator.setCurrentOperation(operationKey);
+        this.calculator.setCurrentValue(Float.parseFloat(this.displayField.getText()));
+        this.displayField.appendText(operationDisplayed);
+        this.toClear = true;
+    }
+
+    private void negateButtonPressed() {
+        if(this.displayField.getText().charAt(0) == '-')
+            this.displayField.setText(this.displayField.getText().substring(1));
+        else
+            this.displayField.setText("-" + this.displayField.getText());
+    }
+
+    private void sqrtButtonPressed() {
+        if(this.calculator.getCurrentOperation() == null) {
+            this.calculator.sqrtValue(Float.parseFloat(this.displayField.getText()));
+            updateDisplayedValue();
+        }
+    }
+
+    private void squareButtonPressed() {
+        if(this.calculator.getCurrentOperation() == null) {
+            this.calculator.squareValue(Float.parseFloat(this.displayField.getText()));
+            updateDisplayedValue();
+        }
     }
 
     private void clear() {
+        this.toClear = false;
         this.displayField.clear();
-        calculator.clearAll();
+        this.calculator.clearAll();
+    }
+
+    private void clearEntry() {
+        this.toClear = false;
+        this.displayField.clear();
     }
 
     private void compute() {
-        if(calculator.getCurrentOperation() != null) {
-            float entered = Float.parseFloat(displayField.getText());
-            calculator.compute(entered);
+        if(this.calculator.getCurrentOperation() != null) {
+            this.calculator.compute(Float.parseFloat(displayField.getText()));
             updateDisplayedValue();
         }
     }
