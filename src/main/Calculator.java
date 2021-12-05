@@ -14,6 +14,7 @@ public class Calculator {
     private String currentOperation;
 
     public Calculator() {
+        clearAll();
     }
 
     public String[] getOperations() {
