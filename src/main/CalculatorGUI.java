@@ -12,6 +12,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -29,6 +31,7 @@ public class CalculatorGUI extends Application {
 
     private Calculator calculator = new Calculator();
     private boolean toClear = false;
+    private boolean dot = false;
 
     @Override
     public void start(Stage primaryStage) {
@@ -53,10 +56,11 @@ public class CalculatorGUI extends Application {
 
         Scene scene = new Scene(grid, DEFAULT_WIDTH, DEFAULT_HEIGHT);
 
-        displayField = new TextField();
-        displayField.setPrefHeight(MAX_HEIGHT / (double) rowCount);
-        displayField.setPrefWidth(MAX_WIDTH / (double) colCount);
-        displayField.setPromptText("Numbers will appear here...");
+        this.displayField = new TextField();
+        this.displayField.setEditable(false);
+        this.displayField.setPrefHeight(MAX_HEIGHT / (double) rowCount);
+        this.displayField.setPrefWidth(MAX_WIDTH / (double) colCount);
+        this.displayField.setPromptText("Numbers will appear here...");
 
         Button zero = new Button("0");
         zero.setPrefWidth(2 * MAX_WIDTH / (double) colCount);
@@ -164,7 +168,7 @@ public class CalculatorGUI extends Application {
         dot.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                numericButtonPressed(".");
+                decimalButtonPressed();
             }
         });
 
@@ -174,7 +178,7 @@ public class CalculatorGUI extends Application {
         multiply.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                operationButtonPressed("*", Calculator.MULT_OP);
+                operationButtonPressed(Calculator.MULT_OP);
             }
         });
 
@@ -184,7 +188,7 @@ public class CalculatorGUI extends Application {
         divide.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                operationButtonPressed("/", Calculator.DIV_OP);
+                operationButtonPressed(Calculator.DIV_OP);
             }
         });
 
@@ -194,17 +198,17 @@ public class CalculatorGUI extends Application {
         add.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                operationButtonPressed("+", Calculator.ADD_OP);
+                operationButtonPressed(Calculator.ADD_OP);
             }
         });
 
         Button minus = new Button("-");
         minus.setPrefWidth(MAX_WIDTH / (double) colCount);
         minus.setPrefHeight(MAX_HEIGHT / (double) rowCount);
-        multiply.setOnAction(new EventHandler<ActionEvent>() {
+        minus.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                operationButtonPressed("-", Calculator.SUB_OP);
+                operationButtonPressed(Calculator.SUB_OP);
             }
         });
 
@@ -274,7 +278,7 @@ public class CalculatorGUI extends Application {
         pow.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                operationButtonPressed("^", Calculator.POW_OP);
+                operationButtonPressed(Calculator.POW_OP);
             }
         });
 
@@ -283,7 +287,7 @@ public class CalculatorGUI extends Application {
         slider.setPrefHeight(2 * MAX_HEIGHT / (double) rowCount);
         slider.setOrientation(Orientation.VERTICAL);
 
-        grid.add(displayField, 0, 0, colCount, 1);
+        grid.add(this.displayField, 0, 0, colCount, 1);
         grid.add(zero, 1, rowCount-1, 2, 1);
         grid.add(one, 3, 4);
         grid.add(two, 2, 4);
@@ -308,9 +312,88 @@ public class CalculatorGUI extends Application {
         grid.add(pow, 0, 5);
         grid.add(slider, 0, 1, 1, 2);
 
+        displayField.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent event) {
+                if(((event.getCode() == KeyCode.DIGIT6) && event.isShiftDown()) || (event.getCode() == KeyCode.CIRCUMFLEX))
+                    operationButtonPressed(Calculator.POW_OP);
+                else if(((event.getCode() == KeyCode.EQUALS) && event.isShiftDown()) || (event.getCode() == KeyCode.PLUS) || (event.getCode() == KeyCode.ADD))
+                    operationButtonPressed(Calculator.ADD_OP);
+                else {
+                    switch(event.getCode()) {
+                        case C:
+                        case DELETE:
+                            clear();
+                            break;
+                        case ENTER:
+                        case EQUALS:
+                            compute();
+                            break;
+                        case ASTERISK:
+                        case MULTIPLY:
+                            operationButtonPressed(Calculator.MULT_OP);
+                            break;
+                        case SLASH:
+                        case DIVIDE:
+                            operationButtonPressed(Calculator.DIV_OP);
+                            break;
+                        case MINUS:
+                        case SUBTRACT:
+                            operationButtonPressed(Calculator.SUB_OP);
+                            break;
+                        case PERIOD:
+                        case DECIMAL:
+                            decimalButtonPressed();
+                            break;
+                        case DIGIT0:
+                        case NUMPAD0:
+                            numericButtonPressed("0");
+                            break;
+                        case DIGIT1:
+                        case NUMPAD1:
+                            numericButtonPressed("1");
+                            break;
+                        case DIGIT2:
+                        case NUMPAD2:
+                            numericButtonPressed("2");
+                            break;
+                        case DIGIT3:
+                        case NUMPAD3:
+                            numericButtonPressed("3");
+                            break;
+                        case DIGIT4:
+                        case NUMPAD4:
+                            numericButtonPressed("4");
+                            break;
+                        case DIGIT5:
+                        case NUMPAD5:
+                            numericButtonPressed("5");
+                            break;
+                        case DIGIT6:
+                        case NUMPAD6:
+                            numericButtonPressed("6");
+                            break;
+                        case DIGIT7:
+                        case NUMPAD7:
+                            numericButtonPressed("7");
+                            break;
+                        case DIGIT8:
+                        case NUMPAD8:
+                            numericButtonPressed("8");
+                            break;
+                        case DIGIT9:
+                        case NUMPAD9:
+                            numericButtonPressed("9");
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        });
+
         primaryStage.setScene(scene);
         primaryStage.setTitle("Calculator");
-        System.out.println(System.getProperty("user.dir"));
         primaryStage.getIcons().add(new Image("file:./src/resources/icon.png"));
         primaryStage.show();
     }
@@ -332,11 +415,22 @@ public class CalculatorGUI extends Application {
         this.displayField.appendText(value);
     }
 
-    private void operationButtonPressed(String operationDisplayed, String operationKey) {
-        this.calculator.setCurrentOperation(operationKey);
-        this.calculator.setCurrentValue(Float.parseFloat(this.displayField.getText()));
-        this.displayField.appendText(operationDisplayed);
-        this.toClear = true;
+    private void decimalButtonPressed() {
+        if(!this.dot) {
+            this.dot = true;
+            numericButtonPressed(".");
+        }
+    }
+
+    private void operationButtonPressed(String operationKey) {
+        try {
+            this.calculator.setCurrentOperation(operationKey);
+            this.calculator.setCurrentValue(Float.parseFloat(this.displayField.getText()));
+            this.displayField.appendText(operationKey);
+            this.toClear = true;
+        } catch(NumberFormatException nfe) {
+            //do nothing, ignore
+        }
     }
 
     private void negateButtonPressed() {
@@ -362,19 +456,25 @@ public class CalculatorGUI extends Application {
 
     private void clear() {
         this.toClear = false;
+        this.dot = false;
         this.displayField.clear();
         this.calculator.clearAll();
     }
 
     private void clearEntry() {
         this.toClear = false;
+        this.dot = false;
         this.displayField.clear();
     }
 
     private void compute() {
-        if(this.calculator.getCurrentOperation() != null) {
-            this.calculator.compute(Float.parseFloat(displayField.getText()));
-            updateDisplayedValue();
+        try {
+            if(this.calculator.getCurrentOperation() != null) {
+                this.calculator.compute(Float.parseFloat(displayField.getText()));
+                updateDisplayedValue();
+            }
+        } catch(NumberFormatException nfe) {
+            //do nothing, ignore
         }
     }
 

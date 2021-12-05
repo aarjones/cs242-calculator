@@ -3,8 +3,8 @@ package main;
 public class Calculator {
     public final static String ADD_OP = "+";
     public final static String SUB_OP = "−";
-    public final static String MULT_OP = "×";
-    public final static String DIV_OP = "÷";
+    public final static String MULT_OP = "*";
+    public final static String DIV_OP = "/";
     public final static String NEG_OP = "±";
     public final static String SQ_OP = "x²";
     public final static String SQRT_OP = "√";
