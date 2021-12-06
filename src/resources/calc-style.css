@@ -1,0 +1,37 @@
+.main-content {
+    -fx-background-color: #f2f2f2;
+}
+.display-field {
+    -fx-background-color: linear-gradient(#ffffff, #f2f2f2);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 2, 0.0, 0, 1);
+}
+.num-button {
+    -fx-background-color: linear-gradient(#efefef, #d2efef);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 3, 0.0, 0, 1);
+    -fx-text-color: #ffffff;
+}
+.num-button:hover {
+    -fx-background-color: linear-gradient(#f4f4f4, #e0f4f4);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 3, 0.0, 0, 1);
+    -fx-text-color: #ffffff;
+}
+.num-button:pressed {
+    -fx-background-color: linear-gradient(#f4f4f4, #ddecec);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 5, 0.0, 0, 1);
+    -fx-text-color: #ffffff;
+}
+.func-button {
+    -fx-background-color: linear-gradient(#efefef, #efdbdb);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 3, 0.0, 0, 1);
+    -fx-text-color: #ffffff;
+}
+.func-button:hover {
+    -fx-background-color: linear-gradient(#f4f4f4, #f4dfdf);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 3, 0.0, 0, 1);
+    -fx-text-color: #ffffff;
+}
+.func-button:pressed {
+    -fx-background-color: linear-gradient(#f4f4f4, #f4d7d7);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 5, 0.0, 0, 1);
+    -fx-text-color: #ffffff;
+}

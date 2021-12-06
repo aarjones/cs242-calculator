@@ -44,6 +44,7 @@ public class CalculatorGUI extends Application {
         cc.setPercentWidth(100d / colCount);
 
         GridPane grid = new GridPane();
+        grid.getStyleClass().add("main-content");
         grid.setAlignment(Pos.CENTER);
         grid.setHgap(10);
         grid.setVgap(10);
@@ -55,14 +56,17 @@ public class CalculatorGUI extends Application {
             grid.getColumnConstraints().add(cc);
 
         Scene scene = new Scene(grid, DEFAULT_WIDTH, DEFAULT_HEIGHT);
+        scene.getStylesheets().add("resources/calc-style.css");
 
         this.displayField = new TextField();
+        this.displayField.getStyleClass().add("display-field");
         this.displayField.setEditable(false);
         this.displayField.setPrefHeight(MAX_HEIGHT / (double) rowCount);
         this.displayField.setPrefWidth(MAX_WIDTH / (double) colCount);
         this.displayField.setPromptText("Numbers will appear here...");
 
         Button zero = new Button("0");
+        zero.getStyleClass().add("num-button");
         zero.setPrefWidth(2 * MAX_WIDTH / (double) colCount);
         zero.setPrefHeight(MAX_HEIGHT / (double) rowCount);
         zero.setOnAction(new EventHandler<ActionEvent>() {
@@ -73,6 +77,7 @@ public class CalculatorGUI extends Application {
         });
 
         Button one = new Button("1");
+        one.getStyleClass().add("num-button");
         one.setPrefWidth(MAX_WIDTH / (double) colCount);
         one.setPrefHeight(MAX_HEIGHT / (double) rowCount);
         one.setOnAction(new EventHandler<ActionEvent>() {
@@ -83,6 +88,7 @@ public class CalculatorGUI extends Application {
         });
 
         Button two = new Button("2");
+        two.getStyleClass().add("num-button");
         two.setPrefWidth(MAX_WIDTH / (double) colCount);
         two.setPrefHeight(MAX_HEIGHT / (double) rowCount);
         two.setOnAction(new EventHandler<ActionEvent>() {
@@ -93,6 +99,7 @@ public class CalculatorGUI extends Application {
         });
 
         Button three = new Button("3");
+        three.getStyleClass().add("num-button");
         three.setPrefWidth(MAX_WIDTH / (double) colCount);
         three.setPrefHeight(MAX_HEIGHT / (double) rowCount);
         three.setOnAction(new EventHandler<ActionEvent>() {
@@ -103,6 +110,7 @@ public class CalculatorGUI extends Application {
         });
 
         Button four = new Button("4");
+        four.getStyleClass().add("num-button");
         four.setPrefWidth(MAX_WIDTH / (double) colCount);
         four.setPrefHeight(MAX_HEIGHT / (double) rowCount);
         four.setOnAction(new EventHandler<ActionEvent>() {
@@ -113,6 +121,7 @@ public class CalculatorGUI extends Application {
         });
 
         Button five = new Button("5");
+        five.getStyleClass().add("num-button");
         five.setPrefWidth(MAX_WIDTH / (double) colCount);
         five.setPrefHeight(MAX_HEIGHT / (double) rowCount);
         five.setOnAction(new EventHandler<ActionEvent>() {
@@ -123,6 +132,7 @@ public class CalculatorGUI extends Application {
         });
 
         Button six = new Button("6");
+        six.getStyleClass().add("num-button");
         six.setPrefWidth(MAX_WIDTH / (double) colCount);
         six.setPrefHeight(MAX_HEIGHT / (double) rowCount);
         six.setOnAction(new EventHandler<ActionEvent>() {
@@ -133,6 +143,7 @@ public class CalculatorGUI extends Application {
         });
 
         Button seven = new Button("7");
+        seven.getStyleClass().add("num-button");
         seven.setPrefWidth(MAX_WIDTH / (double) colCount);
         seven.setPrefHeight(MAX_HEIGHT / (double) rowCount);
         seven.setOnAction(new EventHandler<ActionEvent>() {
@@ -143,6 +154,7 @@ public class CalculatorGUI extends Application {
         });
 
         Button eight = new Button("8");
+        eight.getStyleClass().add("num-button");
         eight.setPrefWidth(MAX_WIDTH / (double) colCount);
         eight.setPrefHeight(MAX_HEIGHT / (double) rowCount);
         eight.setOnAction(new EventHandler<ActionEvent>() {
@@ -153,6 +165,7 @@ public class CalculatorGUI extends Application {
         });
 
         Button nine = new Button("9");
+        nine.getStyleClass().add("num-button");
         nine.setPrefWidth(MAX_WIDTH / (double) colCount);
         nine.setPrefHeight(MAX_HEIGHT / (double) rowCount);
         nine.setOnAction(new EventHandler<ActionEvent>() {
@@ -163,6 +176,7 @@ public class CalculatorGUI extends Application {
         });
 
         Button dot = new Button(".");
+        dot.getStyleClass().add("num-button");
         dot.setPrefWidth(MAX_WIDTH / (double) colCount);
         dot.setPrefHeight(MAX_HEIGHT / (double) rowCount);
         dot.setOnAction(new EventHandler<ActionEvent>() {
@@ -173,6 +187,7 @@ public class CalculatorGUI extends Application {
         });
 
         Button multiply = new Button("*");
+        multiply.getStyleClass().add("func-button");
         multiply.setPrefWidth(MAX_WIDTH / (double) colCount);
         multiply.setPrefHeight(MAX_HEIGHT / (double) rowCount);
         multiply.setOnAction(new EventHandler<ActionEvent>() {
@@ -183,6 +198,7 @@ public class CalculatorGUI extends Application {
         });
 
         Button divide = new Button("/");
+        divide.getStyleClass().add("func-button");
         divide.setPrefWidth(MAX_WIDTH / (double) colCount);
         divide.setPrefHeight(MAX_HEIGHT / (double) rowCount);
         divide.setOnAction(new EventHandler<ActionEvent>() {
@@ -193,6 +209,7 @@ public class CalculatorGUI extends Application {
         });
 
         Button add = new Button("+");
+        add.getStyleClass().add("func-button");
         add.setPrefWidth(MAX_WIDTH / (double) colCount);
         add.setPrefHeight(MAX_HEIGHT / (double) rowCount);
         add.setOnAction(new EventHandler<ActionEvent>() {
@@ -203,6 +220,7 @@ public class CalculatorGUI extends Application {
         });
 
         Button minus = new Button("-");
+        minus.getStyleClass().add("func-button");
         minus.setPrefWidth(MAX_WIDTH / (double) colCount);
         minus.setPrefHeight(MAX_HEIGHT / (double) rowCount);
         minus.setOnAction(new EventHandler<ActionEvent>() {
@@ -213,6 +231,7 @@ public class CalculatorGUI extends Application {
         });
 
         Button equals = new Button("=");
+        equals.getStyleClass().add("func-button");
         equals.setPrefWidth(MAX_WIDTH / (double) colCount);
         equals.setPrefHeight(MAX_HEIGHT / (double) rowCount);
         equals.setOnAction(new EventHandler<ActionEvent>() {
@@ -223,6 +242,7 @@ public class CalculatorGUI extends Application {
         });
 
         Button negate = new Button("+/-");
+        negate.getStyleClass().add("func-button");
         negate.setPrefWidth(MAX_WIDTH / (double) colCount);
         negate.setPrefHeight(MAX_HEIGHT / (double) rowCount);
         negate.setOnAction(new EventHandler<ActionEvent>() {
@@ -233,6 +253,7 @@ public class CalculatorGUI extends Application {
         });
 
         Button clear = new Button("C");
+        clear.getStyleClass().add("func-button");
         clear.setPrefWidth(MAX_WIDTH / (double) colCount);
         clear.setPrefHeight(MAX_HEIGHT / (double) rowCount);
         clear.setOnAction(new EventHandler<ActionEvent>() {
@@ -243,6 +264,7 @@ public class CalculatorGUI extends Application {
         });
 
         Button clearEntry = new Button("CE");
+        clearEntry.getStyleClass().add("func-button");
         clearEntry.setPrefWidth(MAX_WIDTH / (double) colCount);
         clearEntry.setPrefHeight(MAX_HEIGHT / (double) rowCount);
         clearEntry.setOnAction(new EventHandler<ActionEvent>() {
@@ -253,6 +275,7 @@ public class CalculatorGUI extends Application {
         });
 
         Button sqrt = new Button("√");
+        sqrt.getStyleClass().add("func-button");
         sqrt.setPrefWidth(MAX_WIDTH / (double) colCount);
         sqrt.setPrefHeight(MAX_HEIGHT / (double) rowCount);
         sqrt.setOnAction(new EventHandler<ActionEvent>() {
@@ -263,6 +286,7 @@ public class CalculatorGUI extends Application {
         });
 
         Button square = new Button("x²");
+        square.getStyleClass().add("func-button");
         square.setPrefWidth(MAX_WIDTH / (double) colCount);
         square.setPrefHeight(MAX_HEIGHT / (double) rowCount);
         square.setOnAction(new EventHandler<ActionEvent>() {
@@ -273,6 +297,7 @@ public class CalculatorGUI extends Application {
         });
 
         Button pow = new Button("x\u02b8");
+        pow.getStyleClass().add("func-button");
         pow.setPrefWidth(MAX_WIDTH / (double) colCount);
         pow.setPrefHeight(MAX_HEIGHT / (double) rowCount);
         pow.setOnAction(new EventHandler<ActionEvent>() {
