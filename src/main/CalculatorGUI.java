@@ -323,8 +323,8 @@ public class CalculatorGUI extends Application {
         slider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number oldNum, Number newNum) {
-                System.out.println("number: " + oldNum);
-                System.out.println("t1:     " + newNum);
+                System.out.println("oldNum:  " + oldNum);
+                System.out.println("newNum:  " + newNum);
             }
         });
 
