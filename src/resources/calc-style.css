@@ -1,5 +1,5 @@
 .main-content {
-    -fx-background-color: #f2f2f2;
+    -fx-background-color: #f7f7f7;
 }
 .display-field {
     -fx-background-color: linear-gradient(#ffffff, #f2f2f2);
@@ -34,4 +34,28 @@
     -fx-background-color: linear-gradient(#f4f4f4, #f4d7d7);
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 5, 0.0, 0, 1);
     -fx-text-color: #ffffff;
+}
+.value-slider .track {
+    -fx-background-color: linear-gradient(#efefef, #dbdbef);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 3, 0.0, 0, 1);
+}
+.value-slider .track:hover {
+    -fx-background-color: linear-gradient(#f4f4f4, #dfdff4);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 3, 0.0, 0, 1);
+}
+.value-slider .track:pressed {
+    -fx-background-color: linear-gradient(#f4f4f4, #d7d7f4);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 5, 0.0, 0, 1);
+}
+.value-slider .thumb {
+    -fx-background-color: linear-gradient(#f2f2f2, #ececec);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 3, 0.0, 0, 1);
+}
+.value-slider .thumb:hover {
+    -fx-background-color: linear-gradient(#fcfcfc, #e2e2e2);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.6), 3, 0.0, 0, 1);
+}
+.value-slider .thumb:pressed {
+    -fx-background-color: linear-gradient(#fcfcfc, #dedede);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.4), 5, 0.0, 0, 1);
 }

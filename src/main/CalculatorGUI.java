@@ -1,8 +1,11 @@
 package main;
 
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
@@ -12,8 +15,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.input.DragEvent;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -307,10 +312,21 @@ public class CalculatorGUI extends Application {
             }
         });
 
-        Slider slider = new Slider();
+        Slider slider = new Slider(0, 10, 0);
+        slider.setShowTickMarks(true);
+        slider.setShowTickLabels(true);
+        slider.setMajorTickUnit(1f);
+        slider.getStyleClass().add("value-slider");
         slider.setPrefWidth(MAX_WIDTH / (double) colCount);
         slider.setPrefHeight(2 * MAX_HEIGHT / (double) rowCount);
         slider.setOrientation(Orientation.VERTICAL);
+        slider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observableValue, Number oldNum, Number newNum) {
+                System.out.println("number: " + oldNum);
+                System.out.println("t1:     " + newNum);
+            }
+        });
 
         grid.add(this.displayField, 0, 0, colCount, 1);
         grid.add(zero, 1, rowCount-1, 2, 1);
