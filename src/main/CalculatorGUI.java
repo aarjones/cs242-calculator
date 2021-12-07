@@ -43,6 +43,9 @@ public class CalculatorGUI extends Application {
         final int colCount = 5;
         final int rowCount = 6;
 
+        primaryStage.setMinWidth(275);
+        primaryStage.setMinHeight(300);
+
         RowConstraints rc = new RowConstraints();
         rc.setPercentHeight(100d / rowCount);
         ColumnConstraints cc = new ColumnConstraints();
@@ -323,8 +326,12 @@ public class CalculatorGUI extends Application {
         slider.valueProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observableValue, Number oldNum, Number newNum) {
-                System.out.println("oldNum:  " + oldNum);
-                System.out.println("newNum:  " + newNum);
+                double roundedNum = newNum.doubleValue();
+                // Round to 2 decimal places
+                roundedNum *= 100;
+                roundedNum = Math.round(roundedNum);
+                roundedNum /= 100;
+                displayField.setText(Double.toString(roundedNum));
             }
         });
 
