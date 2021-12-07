@@ -26,31 +26,65 @@ import javafx.stage.Stage;
 import javafx.stage.Screen;
 
 public class CalculatorGUI extends Application {
+    /**
+     * Creates an object from which we can get the size of the primary screen.
+     */
     private final Rectangle2D screenBounds = Screen.getPrimary().getBounds();
+    /**
+     * Finds the maximum width of the primary screen, used to set preferential sizes for GUI elements.
+     */
     private final int MAX_WIDTH = (int) screenBounds.getWidth();
+    /**
+     * Finds the maximum height of the primary screen, used to set preferential sizes for GUI elements
+     */
     private final int MAX_HEIGHT = (int) screenBounds.getHeight();
+    /**
+     * Default width of the gui.
+     */
     private static final int DEFAULT_WIDTH = 400;
+    /**
+     * Default height of the gui.
+     */
     private static final int DEFAULT_HEIGHT = 500;
-
+    /**
+     * The TextField where operations, numbers, and results are shown.
+     */
     private TextField displayField;
-
+    /**
+     * The Calculator object used for this CalculatorGUI
+     */
     private Calculator calculator = new Calculator();
+    /**
+     * Should the TextField be cleared?
+     */
     private boolean toClear = false;
+    /**
+     * Has a decimal been entered into the TextField?
+     */
     private boolean dot = false;
 
+    /**
+     * Creates a new CalculatorGUI Window.
+     *
+     * @param primaryStage The Primary Stage of the application
+     */
     @Override
     public void start(Stage primaryStage) {
+        //Denotes the size of the grid for the calculator
         final int colCount = 5;
         final int rowCount = 6;
 
         primaryStage.setMinWidth(275);
         primaryStage.setMinHeight(300);
 
+        //Create Row and Column Constraints.  Used to set sizes in Calculator grid
+
         RowConstraints rc = new RowConstraints();
         rc.setPercentHeight(100d / rowCount);
         ColumnConstraints cc = new ColumnConstraints();
         cc.setPercentWidth(100d / colCount);
 
+        //Create a GridPane for Calculator buttons, etc.
         GridPane grid = new GridPane();
         grid.getStyleClass().add("main-content");
         grid.setAlignment(Pos.CENTER);
@@ -58,14 +92,17 @@ public class CalculatorGUI extends Application {
         grid.setVgap(10);
         grid.setPadding(new Insets(25, 25, 25, 25));
 
+        //Apply Row and Column Constraints
         for(int i = 0; i < rowCount; i++)
             grid.getRowConstraints().add(rc);
         for(int i = 0; i < colCount; i++)
             grid.getColumnConstraints().add(cc);
 
+        //Create a scene for the calculator
         Scene scene = new Scene(grid, DEFAULT_WIDTH, DEFAULT_HEIGHT);
         scene.getStylesheets().add("resources/calc-style.css");
 
+        //Configure displayField
         this.displayField = new TextField();
         this.displayField.getStyleClass().add("display-field");
         this.displayField.setEditable(false);
@@ -73,6 +110,7 @@ public class CalculatorGUI extends Application {
         this.displayField.setPrefWidth(MAX_WIDTH / (double) colCount);
         this.displayField.setPromptText("Numbers will appear here...");
 
+        //Create all buttons
         Button zero = new Button("0");
         zero.getStyleClass().add("num-button");
         zero.setPrefWidth(2 * MAX_WIDTH / (double) colCount);
@@ -315,6 +353,7 @@ public class CalculatorGUI extends Application {
             }
         });
 
+        //Create slider
         Slider slider = new Slider(0, 10, 0);
         slider.setShowTickMarks(true);
         slider.setShowTickLabels(true);
@@ -335,6 +374,7 @@ public class CalculatorGUI extends Application {
             }
         });
 
+        //Add all elements to the grid.
         grid.add(this.displayField, 0, 0, colCount, 1);
         grid.add(zero, 1, rowCount-1, 2, 1);
         grid.add(one, 3, 4);
@@ -360,6 +400,7 @@ public class CalculatorGUI extends Application {
         grid.add(pow, 0, 5);
         grid.add(slider, 0, 1, 1, 2);
 
+        //Apply keystroke interactions
         displayField.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
@@ -440,12 +481,16 @@ public class CalculatorGUI extends Application {
             }
         });
 
+        //Run the scene
         primaryStage.setScene(scene);
         primaryStage.setTitle("Calculator");
         primaryStage.getIcons().add(new Image("file:./src/resources/icon.png"));
         primaryStage.show();
     }
 
+    /**
+     * Updates the value shown in the displayField with the current value held in this Calculator object
+     */
     private void updateDisplayedValue() {
         String toDisplay = Float.toString(this.calculator.getCurrentValue());
         if((toDisplay.endsWith(".0")))
@@ -455,6 +500,11 @@ public class CalculatorGUI extends Application {
 
     }
 
+    /**
+     * Actions to take when a numeric button is pressed.
+     *
+     * @param value The numeric value, as a String.
+     */
     private void numericButtonPressed(String value) {
         if(toClear) {
             this.toClear = false;
@@ -463,6 +513,9 @@ public class CalculatorGUI extends Application {
         this.displayField.appendText(value);
     }
 
+    /**
+     * Actions to take when the decimal button is pressed.  Ensures that only one decimal point appears for each number.
+     */
     private void decimalButtonPressed() {
         if(!this.dot) {
             this.dot = true;
@@ -470,6 +523,11 @@ public class CalculatorGUI extends Application {
         }
     }
 
+    /**
+     * Actions to take when most operation buttons are pressed.  Sets this Calculator's current value to the one in the displayField and the current operation to the one just pressed.
+     *
+     * @param operationKey The key defined for the operation to be applied.
+     */
     private void operationButtonPressed(String operationKey) {
         try {
             this.calculator.setCurrentOperation(operationKey);
@@ -481,6 +539,9 @@ public class CalculatorGUI extends Application {
         }
     }
 
+    /**
+     * Implements the negation operation.  Ensures that there are not extra leading '-'.
+     */
     private void negateButtonPressed() {
         if(this.displayField.getText().charAt(0) == '-')
             this.displayField.setText(this.displayField.getText().substring(1));
@@ -488,6 +549,9 @@ public class CalculatorGUI extends Application {
             this.displayField.setText("-" + this.displayField.getText());
     }
 
+    /**
+     * Forces this Calculator to compute the Square Root.
+     */
     private void sqrtButtonPressed() {
         if(this.calculator.getCurrentOperation() == null) {
             this.calculator.sqrtValue(Float.parseFloat(this.displayField.getText()));
@@ -495,6 +559,9 @@ public class CalculatorGUI extends Application {
         }
     }
 
+    /**
+     * Forces this Calculator to compute the square.
+     */
     private void squareButtonPressed() {
         if(this.calculator.getCurrentOperation() == null) {
             this.calculator.squareValue(Float.parseFloat(this.displayField.getText()));
@@ -502,6 +569,9 @@ public class CalculatorGUI extends Application {
         }
     }
 
+    /**
+     * Clears everything.
+     */
     private void clear() {
         this.toClear = false;
         this.dot = false;
@@ -509,12 +579,18 @@ public class CalculatorGUI extends Application {
         this.calculator.clearAll();
     }
 
+    /**
+     * Only clears the latest entry.
+     */
     private void clearEntry() {
         this.toClear = false;
         this.dot = false;
         this.displayField.clear();
     }
 
+    /**
+     * Computes the operation defined with the numbers given using this Calculator.
+     */
     private void compute() {
         try {
             if(this.calculator.getCurrentOperation() != null) {
